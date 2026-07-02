@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 
 import { AppRouter } from './router';
 import { ErrorBoundary } from '@components/ErrorBoundary';
@@ -7,11 +7,17 @@ import { Header } from '@components/Header';
 import { LastSubtabTracker } from '@components/LastSubtabTracker';
 import { Sidebar } from '@components/Sidebar';
 import { ToastContainer } from '@components/Toast';
-import { useSave } from '@store';
+import { useSave, useUi } from '@store';
 import { MotionConfig } from 'framer-motion';
 
 export function App() {
   const hasInitialized = useSave((s) => s.hasInitialized);
+  const locale = useUi((s) => s.ui.locale);
+
+  useEffect(() => {
+    document.documentElement.dataset.locale = locale;
+    document.documentElement.lang = locale === 'en' ? 'en' : locale;
+  }, [locale]);
 
   if (!hasInitialized) {
     return;

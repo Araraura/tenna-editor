@@ -130,6 +130,11 @@
   --text-9xl: calc(8rem * var(--font-scale));
 }
 
+:root[data-locale='ko'] {
+  --font-sans: 'Pixel Operator', 'Galmuri11', sans-serif;
+  --font-mono: 'Pixel Operator Mono', 'Galmuri Mono 11', monospace;
+}
+
 @font-face {
   font-family: 'Pixel Operator';
   src: url('/fonts/PixelOperator.woff2') format('woff2');
@@ -158,6 +163,30 @@
   font-family: 'Pixel Operator Mono';
   src: url('/fonts/PixelOperatorMono-Bold.woff2') format('woff2');
   font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Galmuri11';
+  src: url('/fonts/ko/Galmuri11.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Galmuri11';
+  src: url('/fonts/ko/Galmuri11-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Galmuri Mono 11';
+  src: url('/fonts/ko/GalmuriMono11.woff2') format('woff2');
+  font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
