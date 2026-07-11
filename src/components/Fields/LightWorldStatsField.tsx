@@ -1,14 +1,9 @@
-import { FieldWrapper, NumberInput } from '@components';
+import { NumberField } from '@components';
 import { useSave } from '@store';
 import { useTranslation } from '../../i18n';
 
 type LightWorldStatsType =
-  | 'attack'
-  | 'defence'
-  | 'experience'
-  | 'health'
-  | 'maxHealth'
-  | 'level';
+  'attack' | 'defence' | 'experience' | 'health' | 'maxHealth' | 'level';
 
 const STATS_TITLES: Record<LightWorldStatsType, string> = {
   attack: 'Attack',
@@ -50,20 +45,16 @@ export function LightWorldStatsField({ id, type }: LightWorldStatsFieldProps) {
   }
 
   return (
-    <FieldWrapper
+    <NumberField
       id={id}
       className="flex-1"
       title={t(STATS_TITLE_KEYS[type], STATS_TITLES[type])}
-      label
-    >
-      <NumberInput
-        value={current}
-        placeholder={t('ui.stats.enterValue', 'Enter value...')}
-        min={0}
-        max={9999}
-        onChange={onChange}
-        fullWidth
-      />
-    </FieldWrapper>
+      value={current}
+      placeholder={t('ui.stats.enterValue', 'Enter value...')}
+      min={0}
+      max={9999}
+      onChange={onChange}
+      fullWidth
+    />
   );
 }

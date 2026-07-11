@@ -24,7 +24,7 @@ import {
 import Markdown from 'react-markdown';
 import {
   Checkbox,
-  NumberInput,
+  NumberField,
   type SelectItem,
   Select,
   FieldWrapper,
@@ -97,8 +97,7 @@ export function FlagField(props: FlagFieldProps) {
   const chapterFlagsContext = useChapterFlags();
   const saveChapter = useSave((s) => s.save?.meta.chapter) ?? 1;
   const chapterFlags =
-    chapterFlagsContext ??
-    chapterHelpers.getById(saveChapter).content.flags;
+    chapterFlagsContext ?? chapterHelpers.getById(saveChapter).content.flags;
 
   if (sourceFlag === undefined || !chapterFlags.has(sourceFlag)) return;
   if (!resolvedField) return;
@@ -145,23 +144,17 @@ export function FlagField(props: FlagFieldProps) {
     );
   } else if (valueType === 'number') {
     return (
-      <FieldWrapper
+      <NumberField
         id={id}
-        className={mergeClass('flex flex-col gap-2', className)}
-        description={description}
+        className={className}
         title={displayName}
-        label
-      >
-        <NumberInput
-          value={(currentValue as number) ?? 0}
-          placeholder={t('ui.flag.numberPlaceholder', 'Enter number...')}
-          min={valueRules?.min ?? 0}
-          max={valueRules?.max ?? 999999999}
-          onChange={(value) => {
-            updateValue(value);
-          }}
-        />
-      </FieldWrapper>
+        description={description}
+        value={(currentValue as number) ?? 0}
+        placeholder={t('ui.flag.numberPlaceholder', 'Enter number...')}
+        min={valueRules?.min ?? 0}
+        max={valueRules?.max ?? 999999999}
+        onChange={updateValue}
+      />
     );
   } else if (valueType === 'map') {
     if (valueRules?.map) {
@@ -176,8 +169,7 @@ export function FlagField(props: FlagFieldProps) {
       });
 
       selectItems.sort(
-        (itemA, itemB) =>
-          Number(itemA.value) - Number(itemB.value),
+        (itemA, itemB) => Number(itemA.value) - Number(itemB.value),
       );
 
       const selectedItem = selectItems.find(
@@ -187,7 +179,7 @@ export function FlagField(props: FlagFieldProps) {
       return (
         <FieldWrapper
           id={id}
-          className={mergeClass('flex flex-col gap-2', className)}
+          className={className}
           description={description}
           title={displayName}
           label
@@ -214,7 +206,7 @@ export function FlagField(props: FlagFieldProps) {
     return (
       <FieldWrapper
         id={id}
-        className={mergeClass('flex flex-col gap-3', className)}
+        className={mergeClass('gap-3', className)}
         description={description}
         title={displayName}
         label

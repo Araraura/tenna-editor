@@ -7,7 +7,11 @@ import { useSave } from '@store';
 import { chapterHelpers, prepareFlagData, type PreparedFlag } from '@utils';
 import { FlagRow } from './FlagRow';
 import { ManualFlagEditor } from './ManualFlagEditor';
-import { getFlagTranslationKeyPrefix, translateMeta, useTranslation } from '../../i18n';
+import {
+  getFlagTranslationKeyPrefix,
+  translateMeta,
+  useTranslation,
+} from '../../i18n';
 
 const ITEMS_PER_PAGE_OPTIONS: SelectItem[] = [
   { id: '25', label: '25', value: 25 },
@@ -82,9 +86,10 @@ export function FlagsRoot() {
   );
 
   const filteredFlags = useMemo(
-    () => allFlags
-      .filter((flag) => flag.searchText.includes(normalizedSearchQuery))
-      .sort((a, b) => a.index - b.index),
+    () =>
+      allFlags
+        .filter((flag) => flag.searchText.includes(normalizedSearchQuery))
+        .sort((a, b) => a.index - b.index),
     [allFlags, normalizedSearchQuery],
   );
 
@@ -198,7 +203,9 @@ export function FlagsRoot() {
 
             <Section id="manual-edit" className="mb-4">
               <Card className="p-4 flex flex-col gap-4">
-                <Heading level={3}>{t('ui.flags.manualEdit', 'Manual edit')}</Heading>
+                <Heading level={3}>
+                  {t('ui.flags.manualEdit', 'Manual edit')}
+                </Heading>
                 <ManualFlagEditor />
               </Card>
             </Section>
@@ -209,7 +216,10 @@ export function FlagsRoot() {
                   <TextInput
                     value={searchQuery}
                     onChange={handleSearchChange}
-                    placeholder={t('ui.flags.searchPlaceholder', 'Search flags...')}
+                    placeholder={t(
+                      'ui.flags.searchPlaceholder',
+                      'Search flags...',
+                    )}
                     fullWidth
                     className="sm:min-w-0 sm:flex-1"
                   />
@@ -245,7 +255,7 @@ export function FlagsRoot() {
                     autoComplete="off"
                     noValidate
                   >
-                    <div className="ui-section-label grid grid-cols-[3.5rem_minmax(0,1fr)_7rem_1.25rem] sm:grid-cols-[3.5rem_minmax(9rem,16rem)_minmax(0,1fr)_7rem_1.25rem] items-center gap-4 bg-surface-2 px-4 py-2">
+                    <div className="ui-section-label grid grid-cols-[3.5rem_minmax(0,1fr)_7rem_1.25rem] sm:grid-cols-[3.5rem_minmax(9rem,16rem)_minmax(0,1fr)_7rem_1.25rem] items-center gap-4 bg-surface-3 px-4 py-2">
                       <span>{t('ui.flags.idColumn', 'Id')}</span>
                       <span>{t('ui.flags.flagColumn', 'Flag')}</span>
                       <span className="hidden sm:block">

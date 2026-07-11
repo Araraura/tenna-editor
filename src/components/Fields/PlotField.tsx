@@ -1,7 +1,11 @@
-import { FieldWrapper, NumberInput, Select, type SelectItem } from '@components';
+import {
+  FieldWrapper,
+  NumberInput,
+  Select,
+  type SelectItem,
+} from '@components';
 import { useSave } from '@store';
 import { getChapterPlotOptions, getPlotPointLabel } from '@utils';
-import { mergeClass } from '@utils/merge-class';
 import { useMemo } from 'react';
 import { useTranslation } from '../../i18n';
 
@@ -11,7 +15,11 @@ interface PlotFieldProps {
   allowManualEntry?: boolean;
 }
 
-export function PlotField({ id, className, allowManualEntry = false }: PlotFieldProps) {
+export function PlotField({
+  id,
+  className,
+  allowManualEntry = false,
+}: PlotFieldProps) {
   const { t } = useTranslation();
   const plot = useSave((s) => s.save?.plot) ?? 0;
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
@@ -50,7 +58,7 @@ export function PlotField({ id, className, allowManualEntry = false }: PlotField
   return (
     <FieldWrapper
       id={id}
-      className={mergeClass('flex flex-col gap-2', className)}
+      className={className}
       title={t('ui.field.plotPoint', 'Plot Point')}
       description={description}
       label

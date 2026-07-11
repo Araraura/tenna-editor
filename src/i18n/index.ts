@@ -134,26 +134,46 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.header.undo': 'Undo',
   'ui.header.uploadSave': 'Upload save',
   'ui.download.baseDrIni': 'Base dr.ini',
+  'ui.download.baseDrIniDescription':
+    'Optional: choose your existing dr.ini to preserve metadata that is not stored in save files.',
+  'ui.download.baseContainer': 'Base container',
+  'ui.download.baseContainerDescription':
+    'Optional: choose an existing container to preserve entries that are not selected below.',
   'ui.download.changesSinceBaseline': 'Changes since last upload or download',
   'ui.download.clearBase': 'Clear base',
-  'ui.download.downloadExportSet': 'Download export set',
+  'ui.download.downloadMultipleSaves': 'Download multiple saves',
   'ui.download.downloadSave': 'Download Save',
   'ui.download.downloadSaveFile': 'Download save file',
   'ui.download.exportAs': 'Export as',
+  'ui.download.exportFailed': 'Could not create the export: {message}',
   'ui.download.exportSaveSet': 'Export Save Set',
-  'ui.download.exportSet': 'Export set',
+  'ui.download.experimental': 'Experimental',
+  'ui.download.multipleSaves': 'Multiple saves',
+  'ui.download.multipleSavesExperimentalNotice':
+    'Multiple-save export is experimental.',
+  'ui.download.resetSettings': 'Reset settings',
   'ui.download.inGameSlot': 'In-game slot',
   'ui.download.pcSaveFile': 'PC save file',
   'ui.download.savePlaceholder': 'Save',
   'ui.download.saveSlots': 'Save slots',
   'ui.download.savesAs': 'Saves as',
+  'ui.download.fileName': 'Download file name',
   'ui.download.selectExportType': 'Select export type',
+  'ui.download.selectNamedSave': 'Select {name}',
   'ui.download.selectAtLeastOneSwitchSave':
     'Select at least one save for Switch export.',
   'ui.download.selectAtLeastOneSwitchSaveForSet':
     'Select at least one save for Switch export set',
   'ui.download.switchContainer': 'Switch container',
+  'ui.download.switchExperimentalNotice': 'Switch export is experimental.',
   'ui.download.noSaveLoadedCurrently': 'There is no save loaded currently',
+  'ui.download.noStoredSaves': 'No stored saves available.',
+  'ui.download.loadSavesFailed': 'Stored saves could not be loaded.',
+  'ui.download.duplicateTargets':
+    'Conflict: multiple saves target {targets}. Each slot can only contain one save.',
+  'ui.download.name': 'Name',
+  'ui.download.target': 'Target',
+  'ui.download.source': 'Source',
   'ui.upload.chapter': 'Chapter',
   'ui.upload.chooseSwitchSave': 'Choose Switch Save',
   'ui.upload.confirmChapter': 'Confirm Chapter',
@@ -224,6 +244,9 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.home.whereToFindSaves': 'Where to find saves?',
   'ui.home.saveLocationsIntro':
     'Your DELTARUNE save files are typically located in the following directories:',
+  'ui.home.deltaportNote': "If you're using",
+  'ui.home.deltaportUnofficial': 'an unofficial native Linux port',
+  'ui.home.deltaportNoteSuffix': 'your saves are located at',
   'ui.home.compatibility': 'Compatibility',
   'ui.home.compatibilityDescription':
     'Tenna Editor is compatible with DELTARUNE Chapter 1-5 save files from PC platforms and already-exported Switch save containers. Chapter 5 support includes editor data for recruits, rooms, items, weapons, and armors. Dedicated flags and plot points are not mapped yet.',
@@ -233,7 +256,8 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.home.platformMac': 'Mac',
   'ui.home.platformLinuxProton': 'Linux (through Steam Proton)',
   'ui.lightWorld.items': 'Items',
-  'ui.lightWorld.itemsDescription': 'This inventory applies to Light World only.',
+  'ui.lightWorld.itemsDescription':
+    'This inventory applies to Light World only.',
   'ui.lightWorld.phoneContacts': 'Phone Contacts',
   'ui.party.allowNonStandardParty': 'Allow non-standard party combinations',
   'ui.party.allowNonStandardPartyDescription':
@@ -260,9 +284,6 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.story.vessel': 'Vessel',
   'ui.story.thrashMachine': 'Thrash Machine',
   'ui.story.thrashFit': 'Thrash Fit',
-  'ui.story.chapter5Wip': 'Chapter 5 support is a work in progress.',
-  'ui.story.chapter5UncategorizedWarning':
-    'For now, all flag fields are uncategorized, descriptions may be incomplete, and everything here is subject to change.',
   'ui.field.armorI': 'Armor I',
   'ui.field.armorII': 'Armor II',
   'ui.field.armor': 'Armor',
@@ -343,7 +364,8 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.flags.useBitfieldValue': 'Use Bitfield value',
   'ui.flags.width': 'Width',
   'ui.inventory.storage': 'Storage',
-  'ui.party.allowNonCharacterEquipment': "Allow non-{name}'s weapons, armors and spells",
+  'ui.party.allowNonCharacterEquipment':
+    "Allow non-{name}'s weapons, armors and spells",
   'ui.party.spells': 'Spells',
   'ui.party.unobtainableSpellsWarning':
     'Some of the spells are unobtainable in game. They are often unfinished, broken and can cause issues.',
@@ -474,8 +496,16 @@ const SOURCE_TRANSLATIONS = {
     PHONECONTACTS_META,
     PHONE_CONTACT_NAMES_BY_ID,
   ),
-  ...getMetaSourceTranslations('items.weapons', WEAPONS_META, WEAPON_NAMES_BY_ID),
-  ...getMetaSourceTranslations('characters', CHARACTERS_META, CHARACTER_NAMES_BY_ID),
+  ...getMetaSourceTranslations(
+    'items.weapons',
+    WEAPONS_META,
+    WEAPON_NAMES_BY_ID,
+  ),
+  ...getMetaSourceTranslations(
+    'characters',
+    CHARACTERS_META,
+    CHARACTER_NAMES_BY_ID,
+  ),
   ...getCharacterTitleSourceTranslations(),
   ...getMetaSourceTranslations('chapters', CHAPTERS_META, CHAPTER_NAMES_BY_ID),
   ...getMetaSourceTranslations('enemies', ENEMIES_META, ENEMY_NAMES_BY_ID),
@@ -492,13 +522,17 @@ export function isSupportedLocale(value: unknown): value is Locale {
 
 function getMetaSourceTranslations(
   namespace: string,
-  entries: Record<string | number, {
-    displayName: string;
-    description?: string;
-    valueRules?: {
-      map?: Record<number, string>;
-    };
-  } | undefined>,
+  entries: Record<
+    string | number,
+    | {
+        displayName: string;
+        description?: string;
+        valueRules?: {
+          map?: Record<number, string>;
+        };
+      }
+    | undefined
+  >,
   namesById?: Record<number, string>,
 ) {
   const source: TranslationDictionary = {};
@@ -551,10 +585,7 @@ export function translate(
   return TRANSLATIONS[locale][key] ?? fallback;
 }
 
-export function formatTranslation(
-  template: string,
-  values: TranslationValues,
-) {
+export function formatTranslation(template: string, values: TranslationValues) {
   return template.replace(/\{(\w+)\}/g, (match, key: string) =>
     values[key] === undefined ? match : String(values[key]),
   );
@@ -611,7 +642,9 @@ export function getCharacterTitleTranslationKeyPrefix(
     ([, candidate]) => candidate === title,
   )?.[0];
 
-  return titleName ? `characterTitles.${characterName}.${titleName}` : undefined;
+  return titleName
+    ? `characterTitles.${characterName}.${titleName}`
+    : undefined;
 }
 
 export function getChapterTranslationKeyPrefix(id: number) {
@@ -711,12 +744,12 @@ export function translateMeta<
     return t(`${keyPrefix}.${field}`, fallback);
   };
   const translatedMap = meta.valueRules?.map
-    ? Object.fromEntries(
+    ? (Object.fromEntries(
         Object.entries(meta.valueRules.map).map(([value, label]) => [
           value,
           translateWithPrefixes(`map.${value}`, label),
         ]),
-      ) as Record<number, string>
+      ) as Record<number, string>)
     : undefined;
 
   return {
