@@ -138,7 +138,7 @@ const UI_FALLBACKS: TranslationDictionary = {
     'Optional: choose your existing dr.ini to preserve metadata that is not stored in save files.',
   'ui.download.baseContainer': 'Base container',
   'ui.download.baseContainerDescription':
-    'Optional: choose an existing container to preserve entries that are not selected below.',
+    'Save metadata is generated automatically. Optionally choose an existing container to preserve entries that are not selected below.',
   'ui.download.changesSinceBaseline': 'Changes since last upload or download',
   'ui.download.clearBase': 'Clear base',
   'ui.download.downloadMultipleSaves': 'Download multiple saves',
