@@ -427,7 +427,7 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.about.license': 'License',
   'ui.about.specialThanks': 'Special Thanks',
   'ui.about.specialThanksToby':
-    'Toby Fox and whole Team behind Deltarune - for creating the game.',
+    'Toby Fox and whole Team behind DELTARUNE - for creating the game.',
   'ui.about.specialThanksSpamton':
     'Spamton Editor - for being direct inspiration.',
   'ui.about.specialThanksSpamtonSuffix': ' - for being direct inspiration.',
@@ -439,7 +439,7 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.about.specialThanksJackySuffix':
     " - for save data research and references that helped with a lot of Tenna Editor's data mapping.",
   'ui.about.specialThanksWiki':
-    'Deltarune Wiki - for much useful information that sped up the process of building this project significantly.',
+    'DELTARUNE Wiki - for much useful information that sped up the process of building this project significantly.',
   'ui.about.specialThanksWikiSuffix':
     ' - for much useful information that sped up the process of building this project significantly.',
   'ui.about.specialThanksUmt':
