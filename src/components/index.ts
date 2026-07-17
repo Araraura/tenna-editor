@@ -40,4 +40,5 @@ export * from './InventoryPage';
 export * from './Link';
 export * from './ProgressiveMount';
 export * from './ErrorBoundary';
+export * from './ResponsiveTable';
 export * from './Story';
