@@ -23,8 +23,6 @@ export * from './GlowBar';
 export * from './Loading';
 export * from './LastSubtabTracker';
 export * from './PageContentSpinner';
-export * from './Upload';
-export * from './Download';
 export * from './DownloadChanges';
 export * from './SaveSelector';
 export * from './SaveSourceBadge';
